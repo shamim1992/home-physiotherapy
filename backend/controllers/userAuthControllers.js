@@ -4,7 +4,7 @@ import { errorHandler } from '../utils/error.js';
 import jwt from 'jsonwebtoken'
 
 export const signup = async (req, res, next) => {
-    const { fullName, username, email, password, mobile } = req.body;
+    const { fullName, username, email, password, mobile, registrationNumber } = req.body;
     try {
         if (!username || !email || !password || username === '' || email === '' || password === '') {
             next(errorHandler(400, 'Invalid username or email'));
@@ -15,6 +15,7 @@ export const signup = async (req, res, next) => {
             username,
             email,
             mobile,
+            registrationNumber,
             password: hasedpassword,
         });
         const userdata = await newUser.save();
@@ -31,10 +32,9 @@ export const login = async (req, res) => {
             const user = await User.findOne({ username })
             if (user && bcryptjs.compareSync(password, user.password)) {
                 const { password, ...others } = user._doc;
-
                 const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn:'3h' });
                 res.status(200).cookie('access_token', token, { httpOnly: true }).json(others);
-               
+
             } else {
                 res.status(401).json({ message: 'Invalid Username or Password' })
             }
