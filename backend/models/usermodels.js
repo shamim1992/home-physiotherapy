@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     fullName: {
@@ -42,6 +42,7 @@ const userSchema = new mongoose.Schema({
     prescription:{
         type: String
     },
+    services:[{type: Schema.Types.ObjectId, ref: 'services'}],
     isAdmin:{
         type: Boolean,
         default: false

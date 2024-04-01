@@ -11,12 +11,12 @@ const Cart = () => {
     const navigate = useNavigate();
     const { currentUser } = useSelector(state => state.user);
     const cartItems = useSelector(state => state.cart.items);
-
+console.log(cartItems)
     if (!currentUser) {
         return navigate('/signin');
     }
 
-    const totalPrice = cartItems.reduce((acc, item) => acc + parseFloat(item.price.replace('Rs ', '')), 0);
+    const totalPrice = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
 
 
     return (
@@ -27,12 +27,12 @@ const Cart = () => {
                         {cartItems.length === 0 ? (
                             <p className="mt-4">Your cart is empty.</p>
                         ) : cartItems.map((item) => (
-                            <div key={item.id} className="mt-2 w-full flex flex-col sm:flex-row justify-between gap-4 items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-2">
+                            <div key={item._id} className="mt-2 w-full flex flex-col sm:flex-row justify-between gap-4 items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-2">
                                 <a href="#">
-                                    <img className="rounded-md hidden md:block shadow-md h-10 w-10" src={item.imageSrc} alt="product image" />
+                                    <img className="rounded-md hidden md:block shadow-md h-10 w-10" src={`http://localhost:5001/uploads/${item.serviceimage}`} alt={item.serviceimage} />
                                 </a>
                                 <div className="">
-                                    <h5 className="text-md font-semibold tracking-tight text-gray-900 dark:text-white">{item.name}</h5>
+                                    <h5 className="text-md font-semibold tracking-tight text-gray-900 dark:text-white">{item.servicename}</h5>
                                 </div>
                                 <div className="">
                                     <div className="flex items-center justify-between">

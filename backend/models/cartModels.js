@@ -1,19 +1,16 @@
 import mongoose from "mongoose";
 
 const CartItemSchema = new mongoose.Schema({
-    service: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Service',
+    servicename: {
+        type: String,
         required: true
     },
-    quantity: {
+    servicePrice: {
         type: Number,
-        default: 1
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+    serviceimage:{
+        type: String,
+        
     }
 }, { timestamps: true });
 

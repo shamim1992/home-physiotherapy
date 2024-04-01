@@ -1,20 +1,33 @@
 import { Button, Card, Toast } from 'flowbite-react'
-import React,{useState} from 'react'
-import { useDispatch } from 'react-redux';
+import React,{useEffect, useState} from 'react'
+import { useDispatch , useSelector} from 'react-redux';
 import { addToCart } from '../app/cart/cartSlice'
 import { HiCheck} from 'react-icons/hi'
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios'
 
 const Services = () => {
 
     const dispatch = useDispatch()
-
+const {currentUser} = useSelector(state => state.user)
+console.log(currentUser)
     const [cartItems, setCartItems] = useState([]);
+    const [products, setProduct] = useState([]);
 
-
+// console.log(cartItems)
     const handleAddToCart = (product) => {
-        dispatch(addToCart(product));
-        toast(`${product.name} Added to the cart!`, {
+
+   
+
+        dispatch(addToCart( {
+            _id: product._id,
+            servicename: product.servicename,
+            price: product.price,
+            serviceimage: product.serviceimage,
+            quantity: 1,
+            userId: currentUser._id
+        }));
+        toast(`${product.servicename} Added to the cart!`, {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -28,93 +41,101 @@ const Services = () => {
     };
 
 
-    
+
+    const getService = () =>{
+        axios.get('http://localhost:5001/api/service/services').then(res => setProduct(res.data)).catch(err => console(err))
+    }
 
 
-    const products = [
-        {
-            id: 1,
-            name: 'Interferential therapy (IFT)',
-            href: '#',
-            imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: 'Rs 300',
-            color: 'Black',
-        },
-        {
-            id: 2,
-            name: 'Ultrasound therapy (UST)',
-            href: '#',
-            imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: 'Rs 300',
-            color: 'Black',
-        },
-        {
-            id: 3,
-            name: 'Wax therapy',
-            href: '#',
-            imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: 'Rs 300',
-            color: 'Black',
-        },
-        {
-            id: 4,
-            name: 'Intermittent cervical traction (ICT)',
-            href: '#',
-            imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: 'Rs 300',
-            color: 'Black',
-        },
-        {
-            id: 5,
-            name: 'Intermittent pelvic traction (IPT)',
-            href: '#',
-            imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: 'Rs 300',
-            color: 'Black',
-        },
-        {
-            id: 6,
-            name: 'TENS',
-            href: '#',
-            imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: 'Rs 300',
-            color: 'Black',
-        },
-        {
-            id: 7,
-            name: 'Electrical stimulation',
-            href: '#',
-            imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: 'Rs 300',
-            color: 'Black',
-        },
-        {
-            id: 8,
-            name: 'Mobilisation',
-            href: '#',
-            imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: 'Rs 300',
-            color: 'Black',
-        },
-        {
-            id: 9,
-            name: 'Exercise therapy',
-            href: '#',
-            imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: 'Rs 300',
-            color: 'Black',
-        },
+    useEffect(()=>{
+        getService()
+    },[])
 
-    ]
+
+    // const products = [
+    //     {
+    //         id: 1,
+    //         name: 'Interferential therapy (IFT)',
+    //         href: '#',
+    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    //         imageAlt: "Front of men's Basic Tee in black.",
+    //         price: 'Rs 300',
+    //         color: 'Black',
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Ultrasound therapy (UST)',
+    //         href: '#',
+    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    //         imageAlt: "Front of men's Basic Tee in black.",
+    //         price: 'Rs 300',
+    //         color: 'Black',
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Wax therapy',
+    //         href: '#',
+    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    //         imageAlt: "Front of men's Basic Tee in black.",
+    //         price: 'Rs 300',
+    //         color: 'Black',
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'Intermittent cervical traction (ICT)',
+    //         href: '#',
+    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    //         imageAlt: "Front of men's Basic Tee in black.",
+    //         price: 'Rs 300',
+    //         color: 'Black',
+    //     },
+    //     {
+    //         id: 5,
+    //         name: 'Intermittent pelvic traction (IPT)',
+    //         href: '#',
+    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    //         imageAlt: "Front of men's Basic Tee in black.",
+    //         price: 'Rs 300',
+    //         color: 'Black',
+    //     },
+    //     {
+    //         id: 6,
+    //         name: 'TENS',
+    //         href: '#',
+    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    //         imageAlt: "Front of men's Basic Tee in black.",
+    //         price: 'Rs 300',
+    //         color: 'Black',
+    //     },
+    //     {
+    //         id: 7,
+    //         name: 'Electrical stimulation',
+    //         href: '#',
+    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    //         imageAlt: "Front of men's Basic Tee in black.",
+    //         price: 'Rs 300',
+    //         color: 'Black',
+    //     },
+    //     {
+    //         id: 8,
+    //         name: 'Mobilisation',
+    //         href: '#',
+    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    //         imageAlt: "Front of men's Basic Tee in black.",
+    //         price: 'Rs 300',
+    //         color: 'Black',
+    //     },
+    //     {
+    //         id: 9,
+    //         name: 'Exercise therapy',
+    //         href: '#',
+    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    //         imageAlt: "Front of men's Basic Tee in black.",
+    //         price: 'Rs 300',
+    //         color: 'Black',
+    //     },
+
+    // ]
     return (
         <div className='bg-white dark:bg-gray-900 py-4 '>
 <ToastContainer /> 
@@ -131,11 +152,11 @@ const Services = () => {
                             <Card
                                 className="max-w-sm mx-auto"
                                 imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
-                                imgSrc={product.imageSrc}
-                                key={product.id}>
+                                imgSrc={`http://localhost:5001/uploads/${product.serviceimage}`}
+                                key={product._id}>
                                 <a href="#">
                                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                        {product.name}
+                                        {product.servicename}
                                     </h5>
                                 </a>
                                 <div className="mb-5 mt-2.5 flex items-center">
