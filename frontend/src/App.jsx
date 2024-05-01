@@ -12,6 +12,7 @@ import FooterSection from './components/Footer'
 import Cart from './pages/Cart'
 import Order from './pages/Order'
 import Viewbooking from './components/Viewbooking'
+import Service from './pages/Service'
 
 
 
@@ -30,6 +31,7 @@ function App() {
       <Route path='/signup' element={<SignUp />} />
       <Route path='/cart' element={<Cart/>} />
       <Route path='/order' element={<Order/>} />
+      <Route path='/services' element={<Service/>} />
       <Route path='/*' element={<Home/>} />
       <Route path='/single/:id' element={<Viewbooking/>} />
       

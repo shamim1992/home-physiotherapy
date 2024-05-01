@@ -184,14 +184,14 @@ const Cart = () => {
                                     <div className="py-3 sm:py-4">
                                         <div className="flex items-center">
                                             <div className="inline-flex w-full items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                <TextInput type='date' id='date' className='w-full' onChange={handleChange} />
+                                                <TextInput type='date' id='date' className='w-full' onChange={handleChange} required/>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="py-3 sm:py-4">
                                         <div className="flex items-center">
                                             <div className="inline-flex w-full items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                <TextInput type='text' className='w-full' id='email' placeholder='Enter email' onChange={handleChange} />
+                                                <TextInput type='text' className='w-full' id='email' placeholder='Enter email' onChange={handleChange} required/>
                                             </div>
                                         </div>
                                     </div>

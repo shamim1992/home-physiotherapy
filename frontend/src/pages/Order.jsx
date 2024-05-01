@@ -22,7 +22,7 @@ console.log(bookingData)
             <div className='flex justify-center py-10'>
                 <h1 className='text-2xl font-semibold dark:text-white'>My Order</h1>
             </div>
-            <div className="overflow-x-auto my-10 flex justify-center">
+            <div className="overflow-x-auto  flex justify-center">
                 <table className="w-full sm:w-[80%] table-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 m-15">
                     <thead className="text-xs text-white uppercase bg-indigo-500 dark:bg-gray-700 dark:text-gray-400 rounded-lg">
                         <tr>

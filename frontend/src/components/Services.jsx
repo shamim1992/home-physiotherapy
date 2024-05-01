@@ -137,7 +137,7 @@ console.log(currentUser)
 
     // ]
     return (
-        <div className='bg-white dark:bg-gray-900 py-4 '>
+        <div className='bg-white dark:bg-gray-900 py-8 '>
 <ToastContainer /> 
             <div className=" mb-8 lg:mb-16 mx-auto">
                 <h2 className="mb-4 text-center text-4xl tracking-tight  font-extrabold text-blue-500 dark:text-white">Services</h2>

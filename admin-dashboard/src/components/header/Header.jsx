@@ -64,9 +64,9 @@ const handleSignout =async () => {
             <span className="block text-sm">{currentUser.fullName}</span>
             <span className="block truncate text-sm font-medium">{currentUser.email}</span>
           </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
+          <Dropdown.Item><Link to={'/dashboard'}>Dashboard</Link></Dropdown.Item>
           <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
+          
           <Dropdown.Divider />
           <Dropdown.Item onClick={()=>handleSignout()}>Sign out</Dropdown.Item>
         </Dropdown></>:<><Link to={'/signin'}></Link></>

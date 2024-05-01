@@ -56,7 +56,7 @@ const Header = () => {
                             <span className="block text-sm capitalize">{currentUser.username}</span>
                             <span className="block truncate text-sm font-medium">{currentUser.email}</span>
                         </Dropdown.Header>
-                        <Dropdown.Item>Dashboard</Dropdown.Item>
+                        
                         <Dropdown.Item>Settings</Dropdown.Item>
 
                         <Dropdown.Divider />
@@ -72,6 +72,9 @@ const Header = () => {
                 </Navbar.Link>
                 <Navbar.Link active={path === "/about"} as={'div'}>
                     <Link to='/about'>About</Link>
+                </Navbar.Link>
+                <Navbar.Link active={path === "/services"} as={'div'}>
+                    <Link to='/services'>Services</Link>
                 </Navbar.Link>
                 {currentUser ? <Navbar.Link active={path === "/order"} as={'div'}>
                     <Link to='/order'>Order</Link>
