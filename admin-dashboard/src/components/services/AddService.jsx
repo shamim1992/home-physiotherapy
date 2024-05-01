@@ -18,7 +18,7 @@ const AddService = () => {
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         setFormData(prevState => ({
-            ...prevState,
+            ...prevState, 
             [name]: files ? files[0] : value
         }));
     };

@@ -5,6 +5,7 @@ import { Button, TextInput } from 'flowbite-react';
 import { TiDelete } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const Cart = () => {
@@ -35,7 +36,11 @@ const Cart = () => {
             });
 
             console.log('Booking created:', response.data);
-
+            dispatch(clearCart());
+            toast.success('Booking created successfully!');
+            setTimeout(() => {
+                navigate('/order');
+            }, 2000)
         } catch (error) {
             console.error('Error creating booking:', error);
         }
@@ -50,6 +55,17 @@ const Cart = () => {
 
     return (
         <div className="w-full mx-auto px-4 py-8 min-h-screen dark:bg-gray-800">
+            <ToastContainer position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="sm:col-span-1">

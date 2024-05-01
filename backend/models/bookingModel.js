@@ -15,6 +15,10 @@ const bookingSchema = new mongoose.Schema({
     status: { type: String },
     patientId: { type: String },
     service: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Service' }],
+    status:{
+        type: String,
+        default: "Pending"
+    }
 }, { timestamps: true })
 
 const Booking = mongoose.model("Appointment", bookingSchema);

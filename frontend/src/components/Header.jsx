@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleTheme } from '../app/theme/themeSlice';
 import { IoCartOutline } from "react-icons/io5";
 import { signOut } from '../app/user/userSlice';
+import AppUrl from '../../ApiUrl';
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -15,7 +16,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     const handleToggleTheme = () => {
-        dispatch(toggleTheme())
+        dispatch(toggleTheme());
     }
     const handleSignOut = async () => {
         try {
@@ -50,7 +51,7 @@ const Header = () => {
                     {theme === 'light' ? <FaSun /> : <FaMoon />}
                 </Button>
                 {currentUser ? 
-                    <Dropdown arrowIcon={false} inline label={<Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />}>
+                    <Dropdown arrowIcon={false} inline label={<Avatar alt="User settings" img={`${AppUrl}/uploads/`+currentUser.profilePhoto} rounded />}>
                         <Dropdown.Header>
                             <span className="block text-sm capitalize">{currentUser.username}</span>
                             <span className="block truncate text-sm font-medium">{currentUser.email}</span>

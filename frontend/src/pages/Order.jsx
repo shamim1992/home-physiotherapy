@@ -36,6 +36,9 @@ console.log(bookingData)
                                 Contact
                             </th>
                             <th scope="col" className="px-6 py-3">
+                                Status
+                            </th>
+                            <th scope="col" className="px-6 py-3">
                                 Action
                             </th>
                         </tr>
@@ -51,6 +54,9 @@ console.log(bookingData)
                                 </td>
                                 <td className="px-6 py-4">
                                     {item.contact}
+                                </td>
+                                <td className="px-6 py-4">
+                                    {item.status}
                                 </td>
                                 <td className="px-6 py-4">
                                 <Link to={`/single/${item._id}`}>View</Link>

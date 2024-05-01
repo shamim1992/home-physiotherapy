@@ -205,11 +205,11 @@ console.log(currentUser)
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-md font-base text-gray-900 dark:text-white">{product.price}</span>
+                                    <span className="text-md font-base text-gray-900 dark:text-white">&#8377; {product.price}</span>
                                     <Button 
                                         outline 
                                         gradientDuoTone="purpleToBlue"  
-                                        className="inline-flex items-center justify-center   text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                                        className="inline-flex items-center justify-center   text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 "
                                         onClick={() => handleAddToCart(product)} // Add to cart onClick event
                                     >
                                         Add to Cart

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import ApiUrl from '../../../ApiUrl'
 
 const initialState ={
     service: [],
@@ -12,7 +13,7 @@ export const getServices = createAsyncThunk(
     'getServices',
     async () => {
         try {
-            const response = await axios.get('http://localhost:5001/api/service/services');
+            const response = await axios.get(`${ApiUrl}/api/service/services`);
             return response.data;
         } catch (error) {
             throw error;
@@ -24,7 +25,19 @@ export const deleteServices = createAsyncThunk(
     'deleteServices',
     async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:5001/api/service/${id}`);
+            const response = await axios.delete(`${ApiUrl}/api/service/${id}`);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
+)
+
+export const updateService = createAsyncThunk(
+    'updateService',
+    async ({ id, updatedService }) => {
+        try {
+            const response = await axios.put(`${ApiUrl}/api/service/${id}`, updatedService);
             return response.data;
         } catch (error) {
             throw error;
@@ -64,6 +77,21 @@ export const serviceSlice = createSlice({
                 }
             })
             .addCase(deleteServices.rejected, ()=>{
+                state.loading = false;
+                state.error = action.error.message;
+            })
+            .addCase(updateService.pending, (state) => {
+                state.loading = true;
+                state.error = null; 
+            })
+            .addCase(updateService.fulfilled, (state, action) => {
+                state.loading = false;
+                const updatedService = action.payload;
+                state.service = state.service.map((s) =>
+                    s.id === updatedService.id ? updatedService : s
+                );
+            })
+            .addCase(updateService.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             })

@@ -1,5 +1,6 @@
 import User from "../models/usermodels.js";
 import { errorHandler } from "../utils/error.js";
+import bcrypt from 'bcryptjs';
 export const allusers = async (req, res) => {
 
     try {
@@ -20,11 +21,17 @@ export const singleUser = async (req, res) => {
 }
 
 export const updateUser = async (req, res) => {
+ 
     try {
-        const updateUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        res.status(200).json(updateUser)
+        if (req.body.password) {
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            req.body.password = hashedPassword;
+        }
+     
+        const updateUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.status(200).json(updateUser);
     } catch (error) {
-        res.status(error.status).json(error.message);
+        res.status(error.status || 500).json({ message: error.message || "Internal Server Error" });
     }
 }
 

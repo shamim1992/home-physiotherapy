@@ -5,6 +5,7 @@ import { userReducer } from './users/userSlice'
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import adminSliceReducer from './users/adminSlice';
+import  {appointmentReducer}  from './appointment/appointmentSlice';
 // export const store = configureStore({
 //   reducer: {
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   serviceReducer: serviceReducer,
   userReducer: userReducer,
   adminReducer: adminSliceReducer,
+  appointmentReducer: appointmentReducer
 });
 
 const persistConfig = {

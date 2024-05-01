@@ -3,7 +3,7 @@ import AdminSidebar from '../components/sidebar/AdminSidebar'
 import axios from 'axios'
 import { FaEdit, FaEye } from 'react-icons/fa'
 import { FaDeleteLeft } from 'react-icons/fa6'
-import { Button, Modal } from 'flowbite-react'
+import { Button, Modal } from 'flowbite-react' 
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteUsers, getUsers, getSingleUsers } from '../redux/users/userSlice'
 const UsersList = () => {

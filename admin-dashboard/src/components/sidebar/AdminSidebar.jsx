@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Dropdown, Sidebar } from 'flowbite-react'
 import { HiArrowSmRight, HiArrowCircleRight, HiViewBoards, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser } from 'react-icons/hi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
@@ -11,34 +11,58 @@ const AdminSidebar = () => {
 
     return (
         <div>
-            {
-                sidebar === 'true' ?
-                    <Sidebar aria-label="Default sidebar example " className=' shadow-md'>
-                        <Sidebar.Items className=' py-2 min-h-screen'>
-                            <Sidebar.ItemGroup>
-                                <Sidebar.Item icon={HiChartPie} as='div'>
-                                    <Link to={'/'}>Dashboard</Link>
-                                </Sidebar.Item>
-                                <Sidebar.Collapse icon={HiShoppingBag} label="Appointment">
-                                    <Sidebar.Item href="#">New Appointment</Sidebar.Item>
-                                    <Sidebar.Item href="#">Confirmed Appointment</Sidebar.Item>
-                                    <Sidebar.Item href="#">Cancelled Appointment</Sidebar.Item>
-                                </Sidebar.Collapse>
-                                <Sidebar.Collapse icon={HiViewBoards} label="Services">
-                                <Sidebar.Item as='div'><Link to={'/addservice'}>Add Services</Link> </Sidebar.Item>
-                                    <Sidebar.Item as='div'><Link to={'/services'}>View Services</Link> </Sidebar.Item>
-                                    <Sidebar.Item href="#">Archive Services</Sidebar.Item>
-                                </Sidebar.Collapse>
-                                <Sidebar.Collapse icon={HiUser} label="Users">
-                                    <Sidebar.Item as='div'><Link to={'/users'}>View Users</Link> </Sidebar.Item>
-                                </Sidebar.Collapse>
-                                <Sidebar.Item icon={HiArrowCircleRight}>
-                                    Sign Out
-                                </Sidebar.Item>
-                            </Sidebar.ItemGroup>
-                        </Sidebar.Items>
-                    </Sidebar> : ''
-            }
+            {sidebar === 'true' ? (
+    <div className="shadow-md w-64">
+        <div className="py-2 min-h-screen">
+            <div className="mb-4">
+                <Link to={'/'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                    {/* <HiChartPie className="inline-block w-5 h-5 mr-2" /> */}
+                   <strong>Dashboard</strong> 
+                </Link>
+            </div>
+            <div className="mb-4">
+                <div className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                    {/* <HiShoppingBag className="inline-block w-5 h-5 mr-2" /> */}
+                   <strong>Appointment</strong> 
+                </div>
+                <div className="">
+                    <Link to={'/neworder'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">New Appointment</Link>
+                    <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                        <Link to={'/confirmed'}>Confirmed Appointment</Link>
+                    </div>
+                    <Link to={'/rejected'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Cancelled Appointment</Link>
+                </div>
+            </div>
+            <div className="mb-4">
+                <div className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                    {/* <HiViewBoards className="inline-block w-5 h-5 mr-2" /> */}
+                   <strong>Services</strong> 
+                </div>
+                <div className="">
+                    <Link to={'/addservice'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Add Services</Link>
+                    <Link to={'/services'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">View Services</Link>
+                    <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Archive Services</div>
+                </div>
+            </div>
+            <div className="mb-4">
+                <div className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                    {/* <HiUser className="inline-block w-5 h-5 mr-2" /> */}
+                   <strong>Users</strong> 
+                </div>
+                <div className="">
+                    <Link to={'/users'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">View Users</Link>
+                </div>
+            </div>
+            <div className="mb-4">
+                <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                    {/* <HiArrowCircleRight className="inline-block w-5 h-5 mr-2" /> */}
+                    Sign Out
+                </div>
+            </div>
+        </div>
+    </div>
+) : null}
+
         </div>
 
 
