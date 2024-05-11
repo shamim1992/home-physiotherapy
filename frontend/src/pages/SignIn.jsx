@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import {signInError, signInStart, signInSuccess} from '../app/user/userSlice'
+import AppUrl from '../../ApiUrl';
 
 function SignIn() {
     const navigate = useNavigate()
@@ -22,7 +23,7 @@ function SignIn() {
         
         try {
             dispatch(signInStart())
-            const res = await fetch(`/api/auth/signin/`, {
+            const res = await fetch(`${AppUrl}/api/auth/signin/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

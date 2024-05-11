@@ -31,7 +31,7 @@ const RejectedAppointment = () => {
             });
     };
     // Filter appointments with status 'confirmed'
-    const confirmedAppointments = appointment.filter(item => item.status === 'Rejected');
+    const confirmedAppointments = appointment?.filter(item => item.status === 'Rejected');
 
     return (
         <div className='flex'>

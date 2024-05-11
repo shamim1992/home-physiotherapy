@@ -1,25 +1,7 @@
 import Service from "../models/servicesModels.js";
 
 
-// export const handleFileUpload = (req, res) => {
-//     const { filename } = req.file;
 
-//     const { serviceName, price, description } = req.body
-//     const newFile = new Service({
-//         serviceimage: filename,
-//         serviceName,
-//         price,
-//         description
-//     });
-
-//     newFile.save()
-//         .then(savedFile => {
-//             res.status(200).json({ message: 'File uploaded successfully', file: savedFile });
-//         })
-//         .catch(error => {
-//             res.status(500).json({ error: 'Error saving file to database' });
-//         });
-// };
 
 
 export const addService = async (req, res) => {
@@ -54,8 +36,15 @@ export const getServices = async (req, res) => {
 
 export const updateServices = async (req, res) => {
     const { id } = req.params;
-    const { serviceName, price, description } = req.body
+    const { serviceName, price, description } = req.body;
+    
+    // Check if req.file exists and contains the file you expect
+    if (!req.file || !req.file.filename) {
+        return res.status(400).json({ error: 'File not found in request' });
+    }
+
     const { filename } = req.file;
+    
     try {
         const updatedService = await Service.findByIdAndUpdate(id, {
             serviceName,
@@ -65,9 +54,12 @@ export const updateServices = async (req, res) => {
         }, { new: true });
         res.status(200).json(updatedService);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Error updating services' });
     }
 }
+
+
 
 export const singleService = async (req, res) => {
     try {

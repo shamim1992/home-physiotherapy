@@ -6,6 +6,7 @@ import { TiDelete } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
+import AppUrl from '../../ApiUrl.js';
 
 
 const Cart = () => {
@@ -29,7 +30,7 @@ const Cart = () => {
         const serviceIds = cartItems.map((item) => item._id);
 
         try {
-            const response = await axios.post('/api/booking/appointment', {
+            const response = await axios.post(`${AppUrl}/api/booking/appointment`, {
                 userData,
                 service: serviceIds,
                 formData,

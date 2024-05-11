@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import AppUrl from '../../ApiUrl';
 
 const Viewbooking = () => {
     const [bookingData, setBookingData] = useState({});
+    console.log(bookingData);
     const { id } = useParams();
 
     const getBookingData = () => {
-        axios.get(`/api/booking/${id}`).then(res => setBookingData(res.data));
+        axios.get(`${AppUrl}/api/booking/${id}`).then(res => setBookingData(res.data));
     };
 
     useEffect(() => {
@@ -40,6 +42,16 @@ const Viewbooking = () => {
                                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{item.servicename}</td>
                             </tr>
                         ))}
+                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">Booking Date: </td>
+                            <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{new Date(bookingData.createdAt).toDateString()}</td>
+                        </tr>
+
+                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">Appointment Date: </td>
+                            <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{new Date(bookingData.date).toDateString()}</td>
+                        </tr>
+
                     </tbody>
                 </table>
             </div>

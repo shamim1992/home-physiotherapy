@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import AppUrl from "../../../ApiUrl";
 
 const initialState ={
     users: [],
@@ -7,13 +8,13 @@ const initialState ={
     loading: false,
     error: null
 };
-
+ 
 // Get all the userss
 export const getUsers = createAsyncThunk(
     'getUsers',
     async () => {
         try {
-            const response = await axios.get('http://localhost:5001/api/users');
+            const response = await axios.get(`${AppUrl}/api/users`);
             return response.data;
         } catch (error) {
             throw error;
@@ -25,7 +26,7 @@ export const getSingleUsers = createAsyncThunk(
     'getSingleUsers',
     async (id) => {
         try {
-            const response = await axios.get(`http://localhost:5001/api/users/${id}`);
+            const response = await axios.get(`${AppUrl}/api/users/${id}`);
             return response.data;
         } catch (error) {
             throw error;
@@ -37,7 +38,7 @@ export const deleteUsers = createAsyncThunk(
     'deleteUsers',
     async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:5001/api/users/${id}`);
+            const response = await axios.delete(`${AppUrl}/api/users/${id}`);
             return response.data;
         } catch (error) {
             throw error;

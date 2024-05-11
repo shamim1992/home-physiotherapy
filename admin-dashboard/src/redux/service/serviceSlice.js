@@ -33,17 +33,19 @@ export const deleteServices = createAsyncThunk(
     }
 )
 
-export const updateService = createAsyncThunk(
-    'updateService',
-    async ({ id, updatedService }) => {
-        try {
-            const response = await axios.put(`${ApiUrl}/api/service/${id}`, updatedService);
-            return response.data;
-        } catch (error) {
-            throw error;
-        }
-    }
-)
+// export const updateService = createAsyncThunk(
+//     'updateService',
+//     async ({ id, updatedService }) => {
+//         console.log(id)
+//         try {
+//             const response = await axios.put(`${ApiUrl}/api/service/${id}`, updatedService);
+//             return (response.data) ;
+
+//         } catch (error) {
+//             throw error;
+//         }
+//     }
+// )
 
 export const serviceSlice = createSlice({
     name: 'serviceSlice',
@@ -80,21 +82,21 @@ export const serviceSlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message;
             })
-            .addCase(updateService.pending, (state) => {
-                state.loading = true;
-                state.error = null; 
-            })
-            .addCase(updateService.fulfilled, (state, action) => {
-                state.loading = false;
-                const updatedService = action.payload;
-                state.service = state.service.map((s) =>
-                    s.id === updatedService.id ? updatedService : s
-                );
-            })
-            .addCase(updateService.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message;
-            })
+            // .addCase(updateService.pending, (state) => {
+            //     state.loading = true;
+            //     state.error = null; 
+            // })
+            // .addCase(updateService.fulfilled, (state, action) => {
+            //     state.loading = false;
+            //     const updatedService = action.payload;
+            //     state.service = state.service.map((s) =>
+            //         s.id === updatedService.id ? updatedService : s
+            //     );
+            // })
+            // .addCase(updateService.rejected, (state, action) => {
+            //     state.loading = false;
+            //     state.error = action.error.message;
+            // })
     },
 });
 

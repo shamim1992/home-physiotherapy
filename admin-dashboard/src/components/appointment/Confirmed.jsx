@@ -32,7 +32,7 @@ const Confirmed = () => {
     };
 
     // Filter appointments with status 'confirmed'
-    const confirmedAppointments = appointments.filter(item => item.status === 'confirmed');
+    const confirmedAppointments = appointments?.filter(item => item.status === 'confirmed');
     console.log(confirmedAppointments)
     return (
         <div className='flex'>
@@ -62,7 +62,7 @@ const Confirmed = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {confirmedAppointments.map((item, index) => {
+                            {confirmedAppointments?.map((item, index) => {
                                 return (
                                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xs" >
                                         <td className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">

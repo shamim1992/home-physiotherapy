@@ -25,6 +25,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/booking', bookingRoutes); 
 app.use('/api/service', serviceRoutes);
 
-app.listen(5001, () => {
-  console.log('Example app listening on port 3000!');
+app.listen(process.env.PORT, () => {
+  console.log('Example app listening!',process.env.PORT);
 });

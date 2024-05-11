@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/addservice',upload.single('serviceimage'), addService);
 router.get('/services', getServices);
 router.get('/:id', singleService);
-router.put('/:id',upload.single(), updateServices);
+router.put('/:id',upload.single('serviceimage'), updateServices);
 router.delete('/:id', deleteService);
 
 

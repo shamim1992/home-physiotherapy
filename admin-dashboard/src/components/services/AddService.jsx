@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import AdminSidebar from '../sidebar/AdminSidebar'
 import axios from 'axios'
 import { Alert } from 'flowbite-react';
+import AppUrl from '../../../ApiUrl';
 
 
 const AddService = () => {
@@ -33,7 +34,7 @@ const AddService = () => {
         formDataToSend.append('serviceimage', formData.serviceimage);
 
         try {
-            const response = await axios.post('/api/service/addservice', formDataToSend);
+            const response = await axios.post(`${AppUrl}/api/service/addservice`, formDataToSend);
             setResData(response.data)
         } catch (error) {
             console.error('Error submitting form:', error);

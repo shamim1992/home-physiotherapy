@@ -7,7 +7,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target:
-          'http://localhost:5001',
+          'https://apiphysio.chanrericr.com',
         secure: false,
       },
     },

@@ -1,144 +1,69 @@
 import { Button, Card, Toast } from 'flowbite-react'
-import React,{useEffect, useState} from 'react'
-import { useDispatch , useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../app/cart/cartSlice'
-import { HiCheck} from 'react-icons/hi'
+import { HiCheck } from 'react-icons/hi'
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios'
+import AppUrl from '../../ApiUrl';
 
 const Services = () => {
-
     const dispatch = useDispatch()
-const {currentUser} = useSelector(state => state.user)
-console.log(currentUser)
+    const { currentUser } = useSelector(state => state.user)
     const [cartItems, setCartItems] = useState([]);
     const [products, setProduct] = useState([]);
-
-// console.log(cartItems)
     const handleAddToCart = (product) => {
+        if (currentUser == null) {
+            toast.error("Please login to add to cart", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
 
-   
-
-        dispatch(addToCart( {
-            _id: product._id,
-            servicename: product.servicename,
-            price: product.price,
-            serviceimage: product.serviceimage,
-            quantity: 1,
-            userId: currentUser._id
-        }));
-        toast(`${product.servicename} Added to the cart!`, {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            
             });
+
+        }
+        else {
+            dispatch(addToCart({
+                _id: product._id,
+                servicename: product.servicename,
+                price: product.price,
+                serviceimage: product.serviceimage,
+                quantity: 1,
+                userId: currentUser._id
+            }));
+            toast(`${product.servicename} Added to the cart!`, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+
+            });
+        }
     };
 
 
-
-    const getService = () =>{
-        axios.get('http://localhost:5001/api/service/services').then(res => setProduct(res.data)).catch(err => console(err))
+    const getService = () => {
+        
+          axios.get(`${AppUrl}/api/service/services`).then(res => setProduct(res.data)).catch(err => console(err))
     }
 
-
-    useEffect(()=>{
+    useEffect(() => {
         getService()
-    },[])
+    }, [])
 
 
-    // const products = [
-    //     {
-    //         id: 1,
-    //         name: 'Interferential therapy (IFT)',
-    //         href: '#',
-    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    //         imageAlt: "Front of men's Basic Tee in black.",
-    //         price: 'Rs 300',
-    //         color: 'Black',
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'Ultrasound therapy (UST)',
-    //         href: '#',
-    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    //         imageAlt: "Front of men's Basic Tee in black.",
-    //         price: 'Rs 300',
-    //         color: 'Black',
-    //     },
-    //     {
-    //         id: 3,
-    //         name: 'Wax therapy',
-    //         href: '#',
-    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    //         imageAlt: "Front of men's Basic Tee in black.",
-    //         price: 'Rs 300',
-    //         color: 'Black',
-    //     },
-    //     {
-    //         id: 4,
-    //         name: 'Intermittent cervical traction (ICT)',
-    //         href: '#',
-    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    //         imageAlt: "Front of men's Basic Tee in black.",
-    //         price: 'Rs 300',
-    //         color: 'Black',
-    //     },
-    //     {
-    //         id: 5,
-    //         name: 'Intermittent pelvic traction (IPT)',
-    //         href: '#',
-    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    //         imageAlt: "Front of men's Basic Tee in black.",
-    //         price: 'Rs 300',
-    //         color: 'Black',
-    //     },
-    //     {
-    //         id: 6,
-    //         name: 'TENS',
-    //         href: '#',
-    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    //         imageAlt: "Front of men's Basic Tee in black.",
-    //         price: 'Rs 300',
-    //         color: 'Black',
-    //     },
-    //     {
-    //         id: 7,
-    //         name: 'Electrical stimulation',
-    //         href: '#',
-    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    //         imageAlt: "Front of men's Basic Tee in black.",
-    //         price: 'Rs 300',
-    //         color: 'Black',
-    //     },
-    //     {
-    //         id: 8,
-    //         name: 'Mobilisation',
-    //         href: '#',
-    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    //         imageAlt: "Front of men's Basic Tee in black.",
-    //         price: 'Rs 300',
-    //         color: 'Black',
-    //     },
-    //     {
-    //         id: 9,
-    //         name: 'Exercise therapy',
-    //         href: '#',
-    //         imageSrc: 'https://images.pexels.com/photos/5794048/pexels-photo-5794048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    //         imageAlt: "Front of men's Basic Tee in black.",
-    //         price: 'Rs 300',
-    //         color: 'Black',
-    //     },
-
-    // ]
     return (
         <div className='bg-white dark:bg-gray-900 py-8 '>
-<ToastContainer /> 
+            <ToastContainer />
             <div className=" mb-8 lg:mb-16 mx-auto">
                 <h2 className="mb-4 text-center text-4xl tracking-tight  font-extrabold text-blue-500 dark:text-white">Services</h2>
                 <p className='text-center dark:text-white'>We provide the best physiotherapy services in Bangalore</p>
@@ -152,7 +77,7 @@ console.log(currentUser)
                             <Card
                                 className="max-w-sm mx-auto"
                                 imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
-                                imgSrc={`http://localhost:5001/uploads/${product.serviceimage}`}
+                                imgSrc={`${AppUrl}/uploads/${product.serviceimage}`}
                                 key={product._id}>
                                 <a href="#">
                                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -206,15 +131,15 @@ console.log(currentUser)
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span className="text-md font-base text-gray-900 dark:text-white">&#8377; {product.price}</span>
-                                    <Button 
-                                        outline 
-                                        gradientDuoTone="purpleToBlue"  
+                                    <Button
+                                        outline
+                                        gradientDuoTone="purpleToBlue"
                                         className="inline-flex items-center justify-center   text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 "
                                         onClick={() => handleAddToCart(product)} // Add to cart onClick event
                                     >
                                         Add to Cart
                                     </Button>
-                                    
+
                                 </div>
                             </Card>
                         ))}

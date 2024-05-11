@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import AppUrl from '../../../ApiUrl';
 
 const initialState = {
     appointment: [],
@@ -12,7 +13,7 @@ export const getAppointment = createAsyncThunk(
     'getAppointment',
     async () => {
         try {
-            const response = await axios.get('http://localhost:5001/api/booking/admin/bookings');
+            const response = await axios.get(`${AppUrl}/api/booking/admin/bookings`);
             return response.data;
         } catch (error) {
             throw error;
@@ -24,7 +25,7 @@ export const singleAppointment = createAsyncThunk(
     'singleAppointment',
     async (id) => {
         try {
-            const response = await axios.get(`http://localhost:5001/api/booking/${id}`);
+            const response = await axios.get(`${AppUrl}/api/booking/${id}`);
             return response.data;
         } catch (error) {
             throw error;
@@ -36,7 +37,7 @@ export const updateAppointmentStatus = createAsyncThunk(
     'updateAppointmentStatus',
     async ({ id, status }) => {
         try {
-            const response = await axios.put(`http://localhost:5001/api/booking/${id}`, { status });
+            const response = await axios.put(`${AppUrl}/api/booking/${id}`, { status });
             return response.data;
         } catch (error) {
             throw error;

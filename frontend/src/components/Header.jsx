@@ -4,8 +4,9 @@ import { FaMoon, FaSun } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTheme } from '../app/theme/themeSlice';
 import { IoCartOutline } from "react-icons/io5";
-import { signOut } from '../app/user/userSlice';
+import { getSingleUsers, signOut } from '../app/user/userSlice';
 import AppUrl from '../../ApiUrl';
+import { useEffect } from 'react';
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -20,7 +21,7 @@ const Header = () => {
     }
     const handleSignOut = async () => {
         try {
-            const res = await fetch(`/api/auth/signout`, {
+            const res = await fetch(`${AppUrl}/api/auth/signout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,6 +36,11 @@ const Header = () => {
             console.log(error)
         }
     };
+    useEffect(()=>{
+        if(currentUser){
+            dispatch(getSingleUsers(currentUser._id))
+        }
+    },[])
     return (
         <Navbar className='border-b-2'>
             <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
@@ -57,7 +63,7 @@ const Header = () => {
                             <span className="block truncate text-sm font-medium">{currentUser.email}</span>
                         </Dropdown.Header>
                         
-                        <Dropdown.Item>Settings</Dropdown.Item>
+                        <Dropdown.Item><Link to={'/addprofile'}>Upload Profile Photo</Link> </Dropdown.Item>
 
                         <Dropdown.Divider />
                         <Dropdown.Item onClick={handleSignOut}>Sign out</Dropdown.Item>

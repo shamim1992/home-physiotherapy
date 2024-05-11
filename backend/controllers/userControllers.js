@@ -4,11 +4,11 @@ import bcrypt from 'bcryptjs';
 export const allusers = async (req, res) => {
 
     try {
-    const allusers =await User.find()
-    res.status(200).json(allusers)
-} catch (error) {
-    res.status(error.status).json(error.message);
-}
+        const allusers = await User.find()
+        res.status(200).json(allusers)
+    } catch (error) {
+        res.status(error.status).json(error.message);
+    }
 }
 
 export const singleUser = async (req, res) => {
@@ -21,13 +21,17 @@ export const singleUser = async (req, res) => {
 }
 
 export const updateUser = async (req, res) => {
- 
+console.log(req.file)
+
     try {
         if (req.body.password) {
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
             req.body.password = hashedPassword;
         }
-     
+        if (req.file) {
+            req.body.profilePhoto = req.file.filename;
+        }
+
         const updateUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.status(200).json(updateUser);
     } catch (error) {
@@ -39,7 +43,7 @@ export const deleteUser = async (req, res, next) => {
     try {
         const deleteUser = await User.findByIdAndDelete(req.params.id)
         res.status(200).json(deleteUser)
-        
+
     } catch (error) {
         next(errorHandler(error));
     }

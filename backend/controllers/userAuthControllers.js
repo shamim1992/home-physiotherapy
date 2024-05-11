@@ -15,6 +15,8 @@ export const signup = async (req, res, next) => {
             username,
             email,
             mobile,
+            gender,
+            age,
             registrationNumber,
             password: hasedpassword,
         });
@@ -27,6 +29,7 @@ export const signup = async (req, res, next) => {
 
 export const login = async (req, res) => {
     const { email, username, password } = req.body
+   
     try {
         if (!username == '' ||!password == '') {
             const user = await User.findOne({ username })

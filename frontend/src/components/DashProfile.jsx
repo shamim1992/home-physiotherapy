@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import AppUrl from '../../ApiUrl'
+import { Link } from 'react-router-dom'
 
 const DashProfile = () => {
   const { currentUser } = useSelector(state => state.user)
@@ -11,8 +12,9 @@ const DashProfile = () => {
   const filePickerRef = useRef()
   const [formData, setFormData] = useState({})
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.id]: e.target.value.trim() })
+    setFormData({...formData, [e.target.id]: e.target.value })
   }
+
 
   const handleSubmit = async (e) => {
    e.preventDefault()
@@ -22,22 +24,21 @@ const DashProfile = () => {
    formDataToSend.append('email', formData.email);
    formDataToSend.append('gender', formData.gender);
    formDataToSend.append('mobile', formData.mobile);
-   formDataToSend.append('registrationNumber', formData.registrationNumber);
+   formDataToSend.append('registrationNumber', formData?.registrationNumber);
    formDataToSend.append('address', formData.address);
    formDataToSend.append('password', formData.password);
-  
+  console.log(formDataToSend)
 
-    await axios
-      .put(`/api/users/${currentUser._id}`, formDataToSend)
-      .then((response) => {console.log(response);}).catch((err) => console.log(err));
+    // await axios
+    //   .put(`/api/users/${currentUser._id}`, formDataToSend)
+    //   .then((response) => {console.log(response);}).catch((err) => console.log(err));
   };
 
   const handleImageFile = (e) => {
     const file = e.target.files[0]
     if (file) {
       setImageFile(file)
-      setImageFileUrl(URL.createObjectURL(file))
-     
+      setImageFileUrl(URL.createObjectURL(file));
     }
   }
   return (
@@ -47,6 +48,7 @@ const DashProfile = () => {
         <input type="file" accept='image/*' name='profilePhoto' id='profilePhoto' onChange={handleImageFile} ref={filePickerRef} hidden />
         <div className='w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full' onClick={() => filePickerRef.current.click()} >
           <img src={imageFileUrl ||`${AppUrl}/uploads/`+currentUser.profilePhoto} alt="user" className='rounded-full w-full h-full object-cover border-8 border-[lightgray]' />
+          
         </div>
         <TextInput type='text' name='username' id='username' placeholder='username' defaultValue={currentUser.username} onChange={handleChange} />
         <TextInput type='text' name='fullName' id='fullName' placeholder='Full name' defaultValue={currentUser.fullName} onChange={handleChange} />

@@ -57,7 +57,7 @@ const handleSignout =async () => {
           arrowIcon={false}
           inline
           label={
-            <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" className='rounded-lg'/>
+            <Avatar alt="User settings" img={AppUrl+`/uploads/${currentUser.profilePhoto}`} className='rounded-lg'/>
           }
         >
           <Dropdown.Header>

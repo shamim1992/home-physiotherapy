@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signInError,signInSuccess,signInStart,signOut } from '../redux/users/adminSlice';
+import { signInError,signInSuccess,signInStart} from '../redux/users/adminSlice';
 import { useNavigate } from 'react-router-dom';
+import AppUrl from '../../ApiUrl';
 
 const Signin = () => { 
 
@@ -24,7 +25,7 @@ const handleChange = (e) => {
 
     try {
       dispatch(signInStart())
-      const res = await fetch(`/api/auth/signin`, {
+      const res = await fetch(`${AppUrl}/api/auth/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -44,6 +45,8 @@ const handleChange = (e) => {
       dispatch(signInError(error.message))
     }
   };
+
+  console.log(formData)
 
   return (
     <div>

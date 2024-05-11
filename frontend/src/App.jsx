@@ -13,12 +13,14 @@ import Cart from './pages/Cart'
 import Order from './pages/Order'
 import Viewbooking from './components/Viewbooking'
 import Service from './pages/Service'
+import AddProfilePhoto from './components/AddProfilePhoto'
+import { ToastContainer } from 'react-toastify'
 
 
 
 
 function App() {
-
+<ToastContainer/>
 
   return (
     <BrowserRouter>
@@ -34,6 +36,7 @@ function App() {
       <Route path='/services' element={<Service/>} />
       <Route path='/*' element={<Home/>} />
       <Route path='/single/:id' element={<Viewbooking/>} />
+      <Route path='/addprofile' element={<AddProfilePhoto/>} />
       
     </Routes>
     <FooterSection/>

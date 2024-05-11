@@ -13,13 +13,31 @@ import NewOrder from './components/appointment/NewOrder'
 import RejectedAppointment from './components/appointment/RejectedAppointment'
 import { useSelector } from 'react-redux'
 import NotFound from './pages/NotFound'
+import UpdateService from './pages/UpdateService'
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 const currentUser = useSelector(state => state.adminReducer.currentUser)
 
+
   
   return (
     <>
+    <ToastContainer
+position="top-center"
+autoClose={3000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+
+
+/>
       <BrowserRouter>
       <Header/>
   
@@ -36,6 +54,7 @@ const currentUser = useSelector(state => state.adminReducer.currentUser)
           <Route path='/neworder' element={<NewOrder />} />
           <Route path='/rejected' element={<RejectedAppointment/>} />
           <Route path='/*' element={<NotFound />} />
+          <Route path='/update/:id' element={<UpdateService/>} />
           </>:<>
           <Route path='/signin' element={<Signin />} />
           <Route path='/*' element={<Signin />} />
