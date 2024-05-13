@@ -8,7 +8,6 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import AppUrl from '../../ApiUrl.js';
 
-
 const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -75,7 +74,7 @@ const Cart = () => {
                         ) : cartItems.map((item) => (
                             <div key={item._id} className="mt-2 w-full flex flex-col sm:flex-row justify-between gap-4 items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-2">
                                 <a href="#">
-                                    <img className="rounded-md hidden md:block shadow-md h-10 w-10" src={`http://localhost:5001/uploads/${item.serviceimage}`} alt={item.serviceimage} />
+                                    <img className="rounded-md hidden md:block shadow-md h-10 w-10" src={`${AppUrl}/uploads/${item.serviceimage}`} alt={item.serviceimage} />
                                 </a>
                                 <div className="">
                                     <h5 className="text-md font-semibold tracking-tight text-gray-900 dark:text-white">{item.servicename}</h5>

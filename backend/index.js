@@ -8,12 +8,14 @@ import userAuth from './routes/userAuthRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import bookingRoutes from './routes/bookingroutes.js'
 import serviceRoutes from './routes/serviceRoute.js'
+import chatRoutes from './routes/ChatRoutes.js'
+
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(cors());
-
 
 const __dirname = path.resolve();
 const directory = path.join(__dirname, 'uploads');
@@ -24,6 +26,7 @@ app.use('/api/auth', userAuth);
 app.use('/api/users', userRoutes);
 app.use('/api/booking', bookingRoutes); 
 app.use('/api/service', serviceRoutes);
+app.use('/api/chat', chatRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log('Example app listening!',process.env.PORT);
