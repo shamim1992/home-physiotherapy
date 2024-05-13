@@ -1,10 +1,12 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  organization: "org-cR86cPJtHYWwnYI0PuKadLIU",
-  apiKey: "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",
-});
-
+// const openai = new OpenAI({
+  
+// });
+// organization: "",
+//   apiKey: "",
+// org-cR86cPJtHYWwnYI0PuKadLIU
+// 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
 export const chatHandler = async (request, response) => {
   try {
     // Check if request.body exists and has a chats property
